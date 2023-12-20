@@ -1,0 +1,12 @@
+.car {
+    height: 30vh;
+    width: 30vh;
+    border: solid 1px black;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: wheat;
+    
+}
