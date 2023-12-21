@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
 import Category from '../Category'
 import './categoreis.css'
 
-export default function Categoreis() {
+export default function Categoreis({setCategoryId}) {
   const [category, setCategory] = useState([])
 
   useEffect(() => {
@@ -14,11 +13,16 @@ export default function Categoreis() {
       })
   })
 
+  const handleClick = (id)=>{
+    const url = 'http://ec2-52-203-207-234.compute-1.amazonaws.com:8443/api/category/'+id
+    
+    setCategoryId(url)
+  }
 
   return category.map((c) => (
-    <div className='categories'>
+    <div key={c.id}className='categories'>
       
-      <Category key={c.id} item={c} />
+      <Category key={c.id} item={c} handleClick={handleClick}/>
     </div>
   ))
 
