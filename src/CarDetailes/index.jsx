@@ -1,21 +1,28 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./carDetailes.css";
 
 export default function carDetailes() {
-  const { carID } = useParams();
   const [car, setCar] = useState({});
+  const { carId } = useParams();
 
   useEffect(() => {
-    fetch("http://ec2-52-203-207-234.compute-1.amazonaws.com:8443/api/" + carID)
-      .then((c) => c.json())
-      .then((data) => setCar(data));
-  }, []);
-
+    fetch("https://jbh-mockserver.onrender.com/car/" + carId)
+      .then((r) => r.json())
+      .then((data) => {
+        setCar(data);
+  });
+  },[]);
   return (
-    <div>
-        {car.price}
-        {car.name}
-        {car.color}
+    <div id="main">
+      {"manufacture: " + car.manufacture}
+      <br />
+      {"year: " + car.year}
+      <br />
+      {"price: " + car.price + "$"}
+      <br />
+      {"color: " + car.color}
+      <br />
     </div>
-  )
+  );
 }

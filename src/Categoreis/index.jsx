@@ -1,29 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import Category from '../Category'
-import './categoreis.css'
+import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Cars from "../Cars";
+import Category from "../Category";
+import "./categoreis.css";
 
-export default function Categoreis({setCategoryId}) {
-  const [category, setCategory] = useState([])
+export default function Categoreis() {
+  const [category, setCategory] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://ec2-52-203-207-234.compute-1.amazonaws.com:8443/api/category')
-      .then(r => r.json())
-      .then(data => {
-        setCategory(data)
-      })
-  })
+    fetch("https://jbh-mockserver.onrender.com/car/categories")
+      .then((r) => r.json())
+      .then((data) => {
+        setCategory(data);
+        navigate(`/categories/${data[0].categoryId}`);
+      });
+  }, []);
 
-  const handleClick = (id)=>{
-    const url = 'http://ec2-52-203-207-234.compute-1.amazonaws.com:8443/api/category/'+id
-    
-    setCategoryId(url)
-  }
-
-  return category.map((c) => (
-    <div key={c.id}className='categories'>
-      
-      <Category key={c.id} item={c} handleClick={handleClick}/>
-    </div>
-  ))
-
+  return (
+    <>
+      <div className="categories">
+        {category.map((c) => (
+          <Category key={c.categoryId} category={c} />
+        ))}
+      </div>
+      <Routes>
+        <Route path="/:catId" element={<Cars />} />
+      </Routes>
+    </>
+  );
 }

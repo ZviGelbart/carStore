@@ -1,17 +1,10 @@
-import React from 'react'
+
+import { useNavigate } from 'react-router-dom'
 import './Category.css'
 
-export default function Category({ item, handleClick }) {
-  
-
-  
-
+export default function Category({ category }) {
+  const nav = useNavigate()
   return (
-
-    <div className='catogoreis'>
-      <div className='categoryItem' onClick={()=>{handleClick(item.id)}}>{item.name}</div>
-      
-    </div>
-
+<div className='categoryItem' onClick={()=>{nav('/categories/'+category.categoryId)}}>{category.categoryName}</div>
   )
 }
