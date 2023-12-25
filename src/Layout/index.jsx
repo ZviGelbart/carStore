@@ -12,14 +12,9 @@ export default function Layout() {
     <Routes>
       <Route path="/categories/*" element={<Categoreis  />} />
       <Route path="/" element={<Categoreis  />} />
-      
-
-
-
       <Route path="/car/:carId" element={<CarDetailes/>} />
-
-      
     </Routes>
+    
     </div>
   );
 }
