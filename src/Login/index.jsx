@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import "./login.css";
 
-export default function login() {
+export default function login({setAddUser}) {
   const [fData, setFData] = useState();
 
   const handleInput = (e) => {
@@ -14,6 +14,7 @@ export default function login() {
     axios
       .post("https://jbh-mockserver.onrender.com/user", fData)
       .then((res) => console.log(res));
+      setAddUser(fData)
   };
 
   return (

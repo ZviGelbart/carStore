@@ -21,8 +21,8 @@ export default function usersTables() {
     })
   }
 
-  const update = () =>{
-    axios.put("https://jbh-mockserver.onrender.com/user")
+  const update = (id) =>{
+    axios.get("https://jbh-mockserver.onrender.com/user/"+id)
   }
   return (
     <div id="table">
@@ -43,7 +43,7 @@ export default function usersTables() {
             <td>{data.lastName}</td>
             <td>{data.email}</td>
             <td>{data.dateOfBirth}</td>
-            <td onClick={()=> update(data)}>🖋️</td>
+            <td onClick={()=> update(data.id)}>🖋️</td>
             <td onClick={() =>remove(data.id)}>🗑️</td>
         </tr>))}
        </table>
